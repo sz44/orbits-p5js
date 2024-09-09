@@ -12,7 +12,7 @@ function getPos(a) {
 }
 
 function draw() {
-  background(220);
+  background(150);
   noFill();
   circle(200, 200, 2*r);
   fill('black');
@@ -21,10 +21,16 @@ function draw() {
   let pointA = getPos(a)
   fill('green');
   circle(pointA.x, pointA.y, 40);
+
+  text(a, 10, 10);
+
   
   let pointB = getPos(a * PI)
   fill('orange');
   circle(pointB.x, pointB.y, 40);
+
+  text(a*PI, 10, 20);
+
 }
 function mousePressed() {
   let pointA = getPos(a)
