@@ -1,31 +1,33 @@
 function setup() {
   createCanvas(400, 400);
 }
-const a = Math.PI/6;
-const b = Math.PI * a;
 const r = 100;
-const pointA = {x:200 + r * Math.cos(a), y:200 + r * Math.sin(a)};
-const pointB = {x:200 + r * Math.cos(b), y:200 + r * Math.sin(b)};
+let a = Math.PI/6;
 let selected = false;
 
 function getPos(a) {
-  
+  return {x:width/2 + r * Math.cos(a),
+          y:height/2 + r * Math.sin(a)
+         };
 }
 
 function draw() {
   background(220);
   noFill();
-  circle(200,200,200);
+  circle(200, 200, 2*r);
   fill('black');
-  circle(200,200,10);
+  circle(200, 200, 10);
  
+  let pointA = getPos(a)
   fill('green');
-  circle(pointA.x,pointA.y,40);
+  circle(pointA.x, pointA.y, 40);
   
+  let pointB = getPos(a * PI)
   fill('orange');
-  circle(pointB.x,pointB.y,40);
+  circle(pointB.x, pointB.y, 40);
 }
 function mousePressed() {
+  let pointA = getPos(a)
   if (dist(mouseX, mouseY, pointA.x, pointA.y) < 20) {
     selected = true;
   }
@@ -35,10 +37,9 @@ function mouseReleased() {
 }
 function mouseDragged() {
   if (selected) {
-    let dx = mouseX-200
-    let dy = mouseY-200
-    let newA = Math.atan2(dx,dy);
-    pointA.x = 200 + r * Math.cos(-newA+PI/2)
-    pointA.y = 200 + r * Math.sin(-newA+PI/2)
+    let dx = mouseX-200;
+    let dy = mouseY-200;
+    let newA = Math.atan2(dy, dx);
+    a = newA;
   }
 }
